@@ -1,0 +1,13 @@
+Metadata-Version: 1.1
+Name: titantools
+Version: 0.0.3
+Summary: Support tools for Titan
+Home-page: https://github.com/mikemackintosh/titan-tools
+Author: Mike Mackintosh
+Author-email: m@zyp.io
+License: LICENSE.txt
+Description: UNKNOWN
+Keywords: Titan,Mac,OSX,IDS
+Platform: UNKNOWN
+Classifier: Programming Language :: Python
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
