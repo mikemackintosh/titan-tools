@@ -1,7 +1,7 @@
 from __future__ import unicode_literals
 
 __copyright__ = "2014, Mike Mackintosh"
-__version__ = '0.0.4'
+__version__ = '0.0.5'
 
 #try:
 #      __import__('pkg_resources').declare_namespace(__name__)
