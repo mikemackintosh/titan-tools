@@ -1,0 +1,4 @@
+runtime: python27
+bpkg: exec sudo /usr/bin/env python setup.py build
+dpkg: exec sudo /usr/bin/env python setup.py sdist
+install: exec sudo /usr/bin/env python setup.py install
