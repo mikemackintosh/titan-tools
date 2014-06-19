@@ -9,7 +9,9 @@ from os.path import isfile, split
 def hw_serial():
     return execute_command("ioreg -c IOPlatformExpertDevice |head -30 |grep IOPlatformSerialNumber | awk '{print $4}'")[0].strip('"')
 
-
+def shell_out( command ):
+    return execute_command( command )
+    
 def execute_command( command ):
  	ps = Popen(command,shell=True,stdout=PIPE,stderr=STDOUT)
  	output = ps.communicate()[0]
