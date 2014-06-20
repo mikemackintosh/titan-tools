@@ -6,7 +6,7 @@ Modified from Tripyarn/MIDAS
 """
 
 import sqlite3
-from helpers.utilities import to_ascii
+from utilities import to_ascii
 
 class TiORM():
     """
