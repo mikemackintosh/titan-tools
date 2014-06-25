@@ -5,7 +5,7 @@ analytics. The naming of this file should inspire fun and laughter rather than
 hatred and anger.
 """
 
-from utilities import diff
+from helpers.utilities import diff
 from copy import copy
 
 
@@ -51,7 +51,8 @@ class DataScience():
                     new_entries.append(i)
 
         for i in new_entries:
-            master = 'ty_name="%s" ' % (self.tablename, )
+            print i
+            master = 'titan_name="%s" ' % (self.tablename, )
             for key, value in i.iteritems():
                 if value != "KEY DNE":
                     master += '%s="%s"' % (key, value)
@@ -61,7 +62,7 @@ class DataScience():
 
     def __master_string(self, tablename, key):
         """master_string is an internal helper for generating a log ling"""
-        return 'ty_name="%s" name="%s" changed_entry="true"' % (
+        return 'titan_name="%s" name="%s" changed_entry="true"' % (
             tablename, key)
 
     def __diff_string(self, changed_field, i_key, data, key, diff_string):
@@ -130,7 +131,7 @@ class DataScience():
             for i in self.all_data:
                 data = self.find_in_data(self.new_data, self.key, i[self.key])
                 if not data:
-                    master = 'ty_name="%s" removed_entry="true" ' % (
+                    master = 'titan_name="%s" removed_entry="true" ' % (
                         self.tablename,)
                     for key, value in i.iteritems():
                         if value != "KEY DNE" and not key.startswith("_"):
