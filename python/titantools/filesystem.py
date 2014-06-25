@@ -257,7 +257,9 @@ def list_ssh_keys(no_password=False):
         which returns all keys
     """
     files = [
-        ".ssh/id_rsa",
+        ".ssh/*_rsa",
+        ".ssh/*_dsa",
+        ".ssh/*.pem",
     ]
 
     ssh_keys = []
