@@ -5,7 +5,7 @@ analytics. The naming of this file should inspire fun and laughter rather than
 hatred and anger.
 """
 
-from helpers.utilities import diff
+from utilities import diff
 from copy import copy
 
 
