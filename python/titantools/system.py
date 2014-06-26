@@ -6,17 +6,19 @@ from re import IGNORECASE
 from re import compile as recompile
 from os.path import isfile, split
 
+# Retruns Mac Serial Number
 def hw_serial():
-    return execute_command("ioreg -c IOPlatformExpertDevice |head -30 |grep IOPlatformSerialNumber | awk '{print $4}'")[0].strip('"')
+    return execute_command("ioreg -c IOPlatformExpertDevice |head -30 |grep IOPlatformSerialNumber | awk '{print $4}'")[1:-2]
 
+# Alias to execute_command
 def shell_out( command ):
     return execute_command( command )
     
+# Executes a system command
 def execute_command( command ):
  	ps = Popen(command,shell=True,stdout=PIPE,stderr=STDOUT)
  	output = ps.communicate()[0]
  	return output
-
 
 def get_kextstat():
     """
