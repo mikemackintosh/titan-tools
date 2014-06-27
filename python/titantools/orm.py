@@ -112,7 +112,7 @@ class TiORM():
 
         if table_name != 'watcher':
             z = attrs.copy()
-            z.update({u"unixtime": {u'type': u"integer", u'default': 0}})
+            z.update({u"unixtime": {u'type': u"integer", u'nullable': False}})
             attrs = z
 
         self.create_table(table_name, attrs)
@@ -131,7 +131,7 @@ class TiORM():
             return None
         
         if table_name != 'watcher' and 'date' in data.keys():
-            data['runtime'] = int(time.mktime(time.strptime(data['date'], "%a, %d %b %Y %H:%M:%S")))
+            data['unixtime'] = int(time.mktime(time.strptime(data['date'], "%a, %d %b %Y %H:%M:%S")))
 
         sql = "INSERT INTO %s" % table_name
         sql += "(id, %s) VALUES" % ', '.join(data.keys())
