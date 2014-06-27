@@ -6,7 +6,8 @@ Modified from Tripyarn/MIDAS
 """
 
 import sqlite3
-from utilities import to_ascii
+import time
+from titantools.utilities import to_ascii
 
 class TiORM():
     """
@@ -76,7 +77,7 @@ class TiORM():
         sql = sql.strip(",\n\t")
         sql += "\n);"
         self.raw_sql(sql)
-
+        
     def alter_table(self, table_name, attrs):
         """alter_table alters a given table based on a supplied table name and
         potentially updated table attributes"""
@@ -108,6 +109,12 @@ class TiORM():
         """initialize_table creates the table if it doesn't exist, alters the
         table if it's definition is different and creates any indexes that it
         needs to if they don't already exist"""
+
+        if table_name != 'watcher':
+            z = attrs.copy()
+            z.update({u"unixtime": {u'type': u"integer", u'nullable': False}})
+            attrs = z
+
         self.create_table(table_name, attrs)
         self.alter_table(table_name, attrs)
         if indexes:
@@ -122,6 +129,10 @@ class TiORM():
         data = to_ascii(data)
         if data is None:
             return None
+        
+        if table_name != 'watcher':
+            data['runtime'] = int(time.mktime(time.strptime(data['date'], "%a, %d %b %Y %H:%M:%S")))
+
         sql = "INSERT INTO %s" % table_name
         sql += "(id, %s) VALUES" % ', '.join(data.keys())
         sql += "(NULL, "
