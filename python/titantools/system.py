@@ -6,6 +6,31 @@ from re import IGNORECASE
 from re import compile as recompile
 from os.path import isfile, split
 
+def hw_details():
+    details = {}
+    output = execute_command("system_profiler SPHardwareDataType")
+
+    details["serial_number"] = parse_output( 'Serial', output )
+    details["hardware_uuid"] = parse_output( 'UUID', output )
+    details["machine_name"] = parse_output( 'Model Identifier', output )
+    details["machine_model"] = parse_output( 'Model Name', output )
+    details["machine_make"] = "Apple"
+    details["cpu_type"] = parse_output( 'Processor Name', output )
+    details["cpu_speed"] = parse_output( 'Processor Speed', output )
+    details["physical_memory"] = parse_output( 'Memory', output )
+    details['model_short'] = details["serial_number"][-4:]
+
+    return details
+
+def sw_details():
+    details = {}
+    output = execute_command("sw_vers")
+    
+    details["os_version"] = parse_output("ProductVersion", output)
+    details["os_build"] = parse_output("BuildVersion", output)
+
+    return details
+
 # Retruns Mac Serial Number
 def hw_serial():
     return execute_command("ioreg -c IOPlatformExpertDevice |head -30 |grep IOPlatformSerialNumber | awk '{print $4}'")[1:-2]
@@ -19,6 +44,11 @@ def execute_command( command ):
  	ps = Popen(command,shell=True,stdout=PIPE,stderr=STDOUT)
  	output = ps.communicate()[0]
  	return output
+
+def parse_output( find_this, in_this ):
+    for line in in_this.splitlines():
+        if find_this.lower() in line.lower():
+            return line.split(':')[-1].strip()
 
 def get_kextstat():
     """
